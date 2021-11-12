@@ -6,6 +6,7 @@ const DB = 'mongoose-example'
 //Models
 const Student = require('./models/Student.js')
 
+//Connect to MongoDB
 const connectToMongo = async()=>{
   try {
 
