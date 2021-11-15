@@ -16,7 +16,7 @@ const Student = require('./models/Student.js')
 const connectToMongo = async()=>{
   try {
 
-   await mongoose.connect(`mongodb+srv://<usuario>:<contraseña>@cluster0.7osla.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
+   await mongoose.connect(`mongodb+srv://jaime:12345@cluster0.7osla.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
@@ -34,14 +34,20 @@ connectToMongo()
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
-//Routes
+//Middleware for the public
+app.use(express.static('public'));
 
+//Middleware for body-parser
+app.use(express.json());
+// app.use(bodyParser.urlencoded({ extended: false }))
+
+//Routes
 app.get('/', (req, res)=>{
   res.render('home.hbs')
 })
 
 app.get('/all-students', async (req, res)=>{
-  // codigo
+  console.log(req.query) //OUTPUT de la linea 70: { name: 'Jaime', otherName: 'Alejandro', status: 'alive' }
   const allStudents = await Student.find({}, {name: 1, lastName: 1})
 
   res.render('allStudents.hbs', {allStudents})
@@ -49,12 +55,28 @@ app.get('/all-students', async (req, res)=>{
 
 app.get('/student/:id', async (req, res)=>{
 
-  const studentInfoFromDatabase = await Student.findById(
-    req.params.id,
-    {name: 1, lastName: 1, age: 1, class: 1, idioma: 1}
-  )
-  
-  res.render('student.hbs', studentInfoFromDatabase)
+  try {
+    const studentInfoFromDatabase = await Student.findById(
+      req.params.id,
+      {name: 1, lastName: 1, age: 1, class: 1, idioma: 1}
+    )
+    res.render('student.hbs', studentInfoFromDatabase)
+  }catch(err){
+    res.render('error.hbs', {errorMsg: "El ID proporcionado no corresponde con ningún alumno."})
+  }
+})
+
+app.get('/new-student', (req, res)=>{
+  res.render('newStudent.hbs')
+})
+
+app.post('/new-student',  async (req, res)=>{
+  try{
+    // const createdStudent = await Student.create(req.body)
+    res.redirect('/all-students')
+  }catch(err){
+    console.log(err)
+  }
 })
 
 
@@ -62,3 +84,6 @@ app.get('/student/:id', async (req, res)=>{
 app.listen(PORT, ()=>{
   console.log(chalk.bgGreen(`Server open at PORT ${PORT}`))
 })
+
+
+// http://localhost:3000/all-students?name=Jaime&otherName=Alejandro&status=alive

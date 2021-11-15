@@ -10,7 +10,6 @@ const studentSchema = new Schema({
   class: {type: String, enum: ["A", "B"]},
   pendingBills: {type: Boolean, default: false},
   idioma: {type: String, enum: ["ingles", "español", "NA"]}
-  
 }, { versionKey: false, timestamps: true  })
 
 module.exports = mongoose.model('Student', studentSchema)
