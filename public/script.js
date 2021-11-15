@@ -11,9 +11,13 @@ createStudentButton.addEventListener("click", () => {
 
   const allInputs = {name, lastName, age, class: classroom, idioma};
 
+  //Ruta POST con axios
   axios({
     method: "POST",
     url: "http://localhost:3000/new-student",
     data: allInputs
   })
+
+  //Ruta GET con axios
+  // axios('http://localhost:3000/new-student')
 });

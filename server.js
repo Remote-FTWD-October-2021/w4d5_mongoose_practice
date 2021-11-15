@@ -39,7 +39,7 @@ app.use(express.static('public'));
 
 //Middleware for body-parser
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({extended: false}))
 
 //Routes
 app.get('/', (req, res)=>{
@@ -67,12 +67,13 @@ app.get('/student/:id', async (req, res)=>{
 })
 
 app.get('/new-student', (req, res)=>{
+  console.log(req.query)
   res.render('newStudent.hbs')
 })
 
 app.post('/new-student',  async (req, res)=>{
   try{
-    // const createdStudent = await Student.create(req.body)
+    const createdStudent = await Student.create(req.body)
     res.redirect('/all-students')
   }catch(err){
     console.log(err)

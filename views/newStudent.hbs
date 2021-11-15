@@ -1,4 +1,4 @@
-<h1>Add new student</h1>
+{{!-- <h1>Add new student</h1>
 
 <p>Nombre del estudiante:</p>
 <input type="text" name="name" id="name" />
@@ -22,4 +22,37 @@
   <option value="NA">N.A.</option>
 </select>
 
-<button id="create-student-button" class="btn btn-primary">Crear estudiante</button>
+<button id="create-student-button" class="btn btn-primary">Crear estudiante</button> --}}
+
+
+{{!-- Cómo crear un formulario por defecto de HTML: --}}
+<form method="GET" action="/new-student">
+
+  <label for="name">Nombre del estudiante:</label>
+  <input type="text" name="name" id="name" />
+
+  <label for="lastName">Apellido del estudiante:</label>
+  <input type="text" name="lastName" id="lastName" />
+
+  <label for="age">Edad:</label>
+  <input type="number" min="0" name="age" id="age" />
+
+  <label for="class">Clase:</label>
+  <select name="class" id="class">
+    <option value="A">A</option>
+    <option value="B">B</option>
+  </select>
+
+  <label for="idioma">Idioma:</label>
+  <select name="idioma" id="idioma">
+    <option value="ingles">Inglés</option>
+    <option value="español" >Español</option>
+    <option value="NA">N.A.</option>
+  </select>
+
+  <button class="btn btn-primary" type="submit">Crear estudiante</button>
+</form>
+
+
+{{!-- http://localhost:3000/new-student?name=Jimena&lastName=Miranda&age=5&class=B&idioma=ingles --}}
+
