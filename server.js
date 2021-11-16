@@ -88,7 +88,7 @@ app.post('/new-student',  async (req, res)=>{
 //Ruta DELETE para eliminar un alumno por su ID
 app.delete('/student/:id', async (req, res)=>{
   try{
-    const deletedStudent = await Student.findByIdAndDelete(req.params.id)
+    const deletedStudent = await Student.findByIdAndDelete(req.params.id, {new: true})
     res.send(deletedStudent)
   }catch(err){
     console.log(err)
@@ -98,7 +98,7 @@ app.delete('/student/:id', async (req, res)=>{
 //Ruta PUT para editar un alumno
 app.put('/edit-student/:id', async (req, res)=>{
   try{
-    const updatedStudent = await Student.findByIdAndUpdate(req.params.id, req.body)
+    const updatedStudent = await Student.findByIdAndUpdate(req.params.id, req.body, {new: true})
     res.send(updatedStudent)
   }catch(err){
     console.log(err)
