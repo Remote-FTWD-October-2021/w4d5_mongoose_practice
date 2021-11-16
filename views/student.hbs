@@ -4,3 +4,31 @@
   <li>This student is {{age}} years old</li>
   <li>Class: {{class}} ({{idioma}})</li>
 </ul>
+
+<button
+  data={{_id}}
+  id="delete-student" 
+  class="btn btn-danger"
+>
+  Eliminar alumno
+</button>
+
+<button
+  data={{_id}}
+  id="edit-student" 
+  class="btn btn-warning"
+>
+  Editar alumno
+</button>
+
+<p>El alumno tiene algún pago pendiente:</p>
+<select name="pendingBills" id="pendingBills-edit">
+  <option value="true">SI</option>
+  <option value="false">NO</option>
+</select>
+
+<p>Nueva clase:</p>
+<select name="class" id="class-edit">
+  <option value="A">A</option>
+  <option value="B">B</option>
+</select>
